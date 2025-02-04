@@ -21,6 +21,7 @@
 #include <wayfire/bindings-repository.hpp>
 #include <wayfire/plugins/ipc/ipc-activator.hpp>
 #include "shade.hpp"
+#include "debug.h"
 
 namespace wf
 {
@@ -239,6 +240,8 @@ class wayfire_pixdecor : public wf::plugin_interface_t
 
     void init() override
     {
+        DoutEntering(dc::pixdecor, "wayfire_pixdecor::init()");
+
         auto& ol = wf::get_core().output_layout;
         ol->connect(&on_output_added);
         ol->connect(&on_output_removed);
@@ -523,6 +526,8 @@ class wayfire_pixdecor : public wf::plugin_interface_t
 
     void fini() override
     {
+        DoutEntering(dc::pixdecor, "wayfire_pixdecor::fini()");
+
         for (auto view : wf::get_core().get_all_views())
         {
             if (auto toplevel = wf::toplevel_cast(view))

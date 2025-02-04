@@ -4,7 +4,7 @@ project(
     'cpp',
     version: '0.1.0',
     license: 'MIT',
-    meson_version: '>=0.51.0',
+    meson_version: '>=0.56.0',
     default_options: [
         'cpp_std=c++17',
         'c_std=c11',
@@ -17,7 +17,6 @@ add_project_link_arguments(['-rdynamic','-fPIC'], language:'cpp')
 
 wayfire = dependency('wayfire', version: '>=0.9.0')
 
-
+subdir('aicxx')
 subdir('src')
 subdir('metadata')
-

@@ -31,6 +31,13 @@
 #include <cairo.h>
 #include "shade.hpp"
 
+#include "debug.h"
+#ifdef CWDEBUG
+NAMESPACE_DEBUG_CHANNELS_START
+channel_ct pixdecor("PLUGIN-PIXDECOR");
+NAMESPACE_DEBUG_CHANNELS_END
+#include "debug_ostream_operators.h"
+#endif
 
 namespace wf
 {

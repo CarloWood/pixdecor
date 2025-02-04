@@ -5,6 +5,7 @@
 #include <wayfire/nonstd/wlroots-full.hpp>
 #include <wayfire/toplevel.hpp>
 #include <wayfire/util.hpp>
+#include "debug.h"
 
 namespace wf
 {

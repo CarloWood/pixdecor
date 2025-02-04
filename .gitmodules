@@ -1,0 +1,3 @@
+[submodule "subprojects/aicxx"]
+	path = subprojects/aicxx
+	url = github-carlo:CarloWood/wayfire-aicxx.git
