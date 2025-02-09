@@ -364,6 +364,8 @@ pixdecor_layout_t::action_response_t pixdecor_layout_t::handle_motion(
 pixdecor_layout_t::action_response_t pixdecor_layout_t::handle_press_event(
     bool pressed)
 {
+    DoutEntering(dc::pixdecor, "decoration_layout_t::handle_press_event(" << std::boolalpha << pressed << ")");
+
     if (pressed)
     {
         auto area = find_area_at(current_input);
@@ -380,6 +382,7 @@ pixdecor_layout_t::action_response_t pixdecor_layout_t::handle_press_event(
 
         if (area && (area->get_type() & DECORATION_AREA_RESIZE_BIT))
         {
+            Dout(dc::pixdecor|flush_cf, "returning DECORATION_ACTION_RESIZE");
             return {DECORATION_ACTION_RESIZE, calculate_resize_edges()};
         }
 
@@ -395,6 +398,7 @@ pixdecor_layout_t::action_response_t pixdecor_layout_t::handle_press_event(
     if (!pressed && double_click_at_release)
     {
         double_click_at_release = false;
+        Dout(dc::pixdecor|flush_cf, "returning DECORATION_ACTION_TOGGLE_MAXIMIZE");
         return {DECORATION_ACTION_TOGGLE_MAXIMIZE, 0};
     } else if (!pressed && is_grabbed)
     {
@@ -410,12 +414,15 @@ pixdecor_layout_t::action_response_t pixdecor_layout_t::handle_press_event(
                 switch (begin_area->as_button().get_button_type())
                 {
                   case BUTTON_CLOSE:
+                    Dout(dc::pixdecor|flush_cf, "returning DECORATION_ACTION_CLOSE");
                     return {DECORATION_ACTION_CLOSE, 0};
 
                   case BUTTON_TOGGLE_MAXIMIZE:
+                    Dout(dc::pixdecor|flush_cf, "returning DECORATION_ACTION_TOGGLE_MAXIMIZE");
                     return {DECORATION_ACTION_TOGGLE_MAXIMIZE, 0};
 
                   case BUTTON_MINIMIZE:
+                    Dout(dc::pixdecor|flush_cf, "returning DECORATION_ACTION_TOGGLE_MINIMIZE");
                     return {DECORATION_ACTION_MINIMIZE, 0};
 
                   default:
@@ -425,6 +432,7 @@ pixdecor_layout_t::action_response_t pixdecor_layout_t::handle_press_event(
         }
     }
 
+    Dout(dc::pixdecor|flush_cf, "returning DECORATION_ACTION_NONE");
     return {DECORATION_ACTION_NONE, 0};
 }
 

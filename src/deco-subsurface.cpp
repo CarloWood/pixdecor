@@ -348,6 +348,8 @@ class simple_decoration_node_t : public wf::scene::node_t, public wf::pointer_in
 
     void handle_pointer_button(const wlr_pointer_button_event& ev) override
     {
+        DoutEntering(dc::pixdecor, "simple_decoration_node_t::handle_pointer_button(" << ev << ") [" << (void*)this << "]");
+
         if (ev.button != BTN_LEFT)
         {
             return;
@@ -424,6 +426,9 @@ class simple_decoration_node_t : public wf::scene::node_t, public wf::pointer_in
 
     void handle_action(pixdecor_layout_t::action_response_t action)
     {
+        DoutEntering(dc::pixdecor(action.action != wf::pixdecor::DECORATION_ACTION_NONE),
+            "simple_decoration_node_t::handle_action(" << action << ") [" << (void*)this << "]");
+
         if (auto view = _view.lock())
         {
             switch (action.action)
